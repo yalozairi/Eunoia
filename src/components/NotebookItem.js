@@ -1,18 +1,15 @@
 import React from "react";
+
 //styling
-import styles from "../styles";
+import { NotebookWrapper } from "../styles";
 
 const NotebookItem = (props) => {
   return (
-    <div style={styles.notebook} key={props.notebook.id}>
-      <img
-        style={styles.item}
-        src={props.notebook.img}
-        alt={props.notebook.alt}
-      />
-      <p style={styles.shopText}>{props.notebook.name}</p>
-      <p style={styles.price}>{props.notebook.price} Kwd</p>
-    </div>
+    <NotebookWrapper key={props.notebook.id}>
+      <img src={props.notebook.img} alt={props.notebook.alt} />
+      <p className="notebook-name">{props.notebook.name}</p>
+      <p className="notebook-price">{props.notebook.price} Kwd</p>
+    </NotebookWrapper>
   );
 };
 export default NotebookItem;

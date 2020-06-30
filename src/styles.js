@@ -1,55 +1,71 @@
-const styles = {
-  centeredText: { textAlign: "center" },
-  centeredImage: {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "30%",
-    // height: "10cm",
-  },
-  title: {
-    textAlign: "center",
-    color: "#DAC732",
-    fontFamily: "gabriela",
-    fontWeight: "900",
-  },
-  notebook: {
-    border: "#82B3B7 solid",
-    borderWidth: "100",
-    borderRadius: "10px",
-    margin: "20px",
-  },
-  item: {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "100px",
-    height: "100px",
-  },
-  list: { alignItems: "center", justifyContent: "center", display: "flex" },
+//styles
+import styled, { createGlobalStyle } from "styled-components";
 
-  shopText: {
-    fontSize: "small",
-    textAlign: "center",
-    marginLeft: "8px",
-    marginRight: "8px",
-    fontFamily: "lato",
-    color: "#11586A",
-  },
+const GlobalStyle = createGlobalStyle`
+body {
+  color: ${(props) => props.theme.darkBlue};
+  background-color: ${(props) => props.theme.backgroundColor};
+  font-family: lato;
+}
+`;
 
-  price: {
-    fontSize: "small",
-    textAlign: "center",
-    color: "purple",
-    fontWeight: "bold",
-    fontFamily: "raleway",
-  },
+const Title = styled.h1`
+  text-align: center;
+  color: ${(props) => props.theme.yellow};
+  font-family: gabriela;
+  font-weight: 900;
+`;
 
-  takeALook: {
-    textAlign: "center",
-    color: "#C9ADA1",
-    marginTop: "30px",
-  },
-};
+const TakeALook = styled.h4`
+  text-align: center;
+  color: ${(props) => props.theme.pink};
+  margin-top: 30px;
+`;
 
-export default styles;
+const Logo = styled.img`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+`;
+
+const ListWrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
+const NotebookWrapper = styled.div`
+  border: ${(props) => props.theme.lightBlue} solid;
+  border-width: 100;
+  border-radius: 10px;
+  margin: 20px;
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+  }
+
+  p {
+    &.notebook-name {
+      font-size: small;
+      text-align: center;
+      margin-left: 8px;
+      margin-right: 8px;
+      font-family: lato;
+      color: ${(props) => props.theme.darkBlue};
+    }
+    &.notebook-price {
+      font-size: small;
+      text-align: center;
+      color: purple;
+      font-weight: bold;
+      font-family: raleway;
+    }
+  }
+`;
+
+export { Title, TakeALook, Logo, ListWrapper, NotebookWrapper, GlobalStyle };
