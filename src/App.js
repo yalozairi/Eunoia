@@ -25,6 +25,7 @@ const theme = {
     green: "#A0A083",
     button: "#e7e7e7",
     buttonText: "black",
+    purple: "purple",
   },
 
   white: {
@@ -39,6 +40,7 @@ const theme = {
     green: "#A0A083",
     button: "#121212",
     buttonText: "white",
+    purple: "purple",
   },
   dark: {
     backgroundColor: "#121212",
@@ -52,30 +54,33 @@ const theme = {
     green: "#A0A083",
     button: "#EAE0CC",
     buttonText: "black",
+    purple: "purple",
   },
 };
 
 function App() {
   let [currentTheme, setCurrentTheme] = useState("default");
 
-  let nextTheme = "White";
-
   const toggleTheme = () => {
-    if (currentTheme === "default") setCurrentTheme("white");
-    else if (currentTheme === "white") setCurrentTheme("dark");
-    else setCurrentTheme("default");
+    currentTheme === "default"
+      ? setCurrentTheme("white")
+      : currentTheme === "white"
+      ? setCurrentTheme("dark")
+      : setCurrentTheme("default");
   };
-
-  if (currentTheme === "default") nextTheme = "White";
-  else if (currentTheme === "white") nextTheme = "Dark";
-  else nextTheme = "Default";
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <Title>Welcome to Eunoia!</Title>
       <ThemeButton onClick={toggleTheme}>
-        Switch to {nextTheme} Theme!
+        Switch to{" "}
+        {currentTheme === "default"
+          ? "White"
+          : currentTheme === "white"
+          ? "Dark"
+          : "Default"}{" "}
+        Theme!
       </ThemeButton>
       <Logo src={logo} alt="Eunoia Palm Tree" />
       <TakeALook>Take a look at our Notebooks!</TakeALook>

@@ -79,13 +79,28 @@ const NotebookWrapper = styled.div`
     &.notebook-price {
       font-size: small;
       text-align: center;
-      color: purple;
+      color: ${(props) => props.theme.purple};
       font-weight: bold;
       font-family: raleway;
     }
   }
 `;
 
+const DeleteButton = styled.button`
+  color: red;
+  border: 0px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  :hover {
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+`;
 export {
   Title,
   TakeALook,
@@ -94,4 +109,5 @@ export {
   NotebookWrapper,
   GlobalStyle,
   ThemeButton,
+  DeleteButton,
 };
