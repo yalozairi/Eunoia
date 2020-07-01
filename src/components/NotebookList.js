@@ -7,6 +7,7 @@ import notebooks from "../notebooks";
 import NotebookItem from "./NotebookItem";
 
 //style
+
 import { ListWrapper } from "../styles";
 
 const NotebookList = () => {

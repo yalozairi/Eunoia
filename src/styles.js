@@ -35,6 +35,24 @@ const ListWrapper = styled.div`
   display: flex;
 `;
 
+const ThemeButton = styled.button`
+  background-color: ${(props) => props.theme.button};
+  border: 2px solid black;
+  border-radius: 10px;
+  color: ${(props) => props.theme.buttonText};
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
+
 const NotebookWrapper = styled.div`
   border: ${(props) => props.theme.lightBlue} solid;
   border-width: 100;
@@ -68,4 +86,12 @@ const NotebookWrapper = styled.div`
   }
 `;
 
-export { Title, TakeALook, Logo, ListWrapper, NotebookWrapper, GlobalStyle };
+export {
+  Title,
+  TakeALook,
+  Logo,
+  ListWrapper,
+  NotebookWrapper,
+  GlobalStyle,
+  ThemeButton,
+};
