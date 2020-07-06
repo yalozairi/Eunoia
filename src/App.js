@@ -9,6 +9,10 @@ import logo from "./logo.png";
 //Notebook List
 import NotebookList from "./components/NotebookList";
 
+// Data
+import notebooks from "./notebooks";
+import Details from "./components/Details";
+
 //theme
 import { ThemeProvider } from "styled-components";
 
@@ -59,14 +63,48 @@ const theme = {
 };
 
 function App() {
-  let [currentTheme, setCurrentTheme] = useState("default");
+  const [currentTheme, setCurrentTheme] = useState("default");
+  const [notebook, setNotebook] = useState(null);
+  const [_notebooks, setNotebooks] = useState(notebooks);
 
+  const deleteNotebook = (notebookId) => {
+    const updatedNotebooks = _notebooks.filter(
+      (notebook) => notebook.id !== +notebookId
+    );
+    setNotebooks(updatedNotebooks);
+    setNotebook(null);
+  };
   const toggleTheme = () => {
     currentTheme === "default"
       ? setCurrentTheme("white")
       : currentTheme === "white"
       ? setCurrentTheme("dark")
       : setCurrentTheme("default");
+  };
+
+  const selectNotebook = (notebookId) => {
+    const selectedNotebook = notebooks.find(
+      (notebook) => notebook.id === notebookId
+    );
+    setNotebook(selectedNotebook);
+  };
+
+  const setView = () => {
+    if (notebook)
+      return (
+        <Details
+          notebook={notebook}
+          deleteNotebook={deleteNotebook}
+          setNotebook={setNotebook}
+        />
+      );
+    return (
+      <NotebookList
+        deleteNotebook={deleteNotebook}
+        notebooks={_notebooks}
+        selectNotebook={selectNotebook}
+      />
+    );
   };
 
   return (
@@ -84,7 +122,7 @@ function App() {
       </ThemeButton>
       <Logo src={logo} alt="Eunoia Palm Tree" />
       <TakeALook>Take a look at our Notebooks!</TakeALook>
-      <NotebookList />
+      {setView()}
     </ThemeProvider>
   );
 }

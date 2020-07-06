@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
-//data
-import notebooks from "../notebooks";
+import React from "react";
 
 //components
 import NotebookItem from "./NotebookItem";
@@ -10,20 +7,13 @@ import NotebookItem from "./NotebookItem";
 
 import { ListWrapper } from "../styles";
 
-const NotebookList = () => {
-  const [_notebooks, setNotebooks] = useState(notebooks);
-
-  const deleteNotebook = (notebookId) => {
-    const updatedNotebooks = _notebooks.filter(
-      (notebook) => notebook.id !== +notebookId
-    );
-    setNotebooks(updatedNotebooks);
-  };
-  const notebookList = _notebooks.map((notebook) => (
+const NotebookList = (props) => {
+  const notebookList = props.notebooks.map((notebook) => (
     <NotebookItem
       notebook={notebook}
       key={notebook.id}
-      deleteNotebook={deleteNotebook}
+      deleteNotebook={props.deleteNotebook}
+      selectNotebook={props.selectNotebook}
     />
   ));
   return <ListWrapper>{notebookList}</ListWrapper>;

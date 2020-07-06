@@ -11,7 +11,12 @@ const NotebookItem = (props) => {
   return (
     <div>
       <NotebookWrapper key={notebook.id}>
-        <img src={notebook.img} alt={notebook.alt} />
+        <img
+          src={notebook.img}
+          alt={notebook.alt}
+          onClick={() => props.selectNotebook(notebook.id)}
+        />
+
         <p className="notebook-name">{notebook.name}</p>
         <p className="notebook-price">{notebook.price} Kwd</p>
       </NotebookWrapper>

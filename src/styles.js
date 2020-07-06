@@ -1,7 +1,7 @@
 //styles
 import styled, { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 body {
   color: ${(props) => props.theme.darkBlue};
   background-color: ${(props) => props.theme.backgroundColor};
@@ -9,33 +9,33 @@ body {
 }
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   text-align: center;
   color: ${(props) => props.theme.yellow};
   font-family: gabriela;
   font-weight: 900;
 `;
 
-const TakeALook = styled.h4`
+export const TakeALook = styled.h4`
   text-align: center;
   color: ${(props) => props.theme.pink};
   margin-top: 30px;
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 30%;
 `;
 
-const ListWrapper = styled.div`
+export const ListWrapper = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
 `;
 
-const ThemeButton = styled.button`
+export const ThemeButton = styled.button`
   background-color: ${(props) => props.theme.button};
   border: 2px solid black;
   border-radius: 10px;
@@ -51,9 +51,15 @@ const ThemeButton = styled.button`
   margin-top: 15px;
   margin-bottom: 20px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  :hover {
+    cursor: pointer;
+  }
+  :active {
+    transform: translateY(4px);
+  }
 `;
 
-const NotebookWrapper = styled.div`
+export const NotebookWrapper = styled.div`
   border: ${(props) => props.theme.lightBlue} solid;
   border-width: 100;
   border-radius: 10px;
@@ -65,6 +71,9 @@ const NotebookWrapper = styled.div`
     margin-right: auto;
     width: 100px;
     height: 100px;
+    :hover {
+      cursor: pointer;
+    }
   }
 
   p {
@@ -86,7 +95,7 @@ const NotebookWrapper = styled.div`
   }
 `;
 
-const DeleteButton = styled.button`
+export const DeleteButton = styled.button`
   color: red;
   border: 0px;
   display: block;
@@ -101,13 +110,72 @@ const DeleteButton = styled.button`
     cursor: pointer;
   }
 `;
-export {
-  Title,
-  TakeALook,
-  Logo,
-  ListWrapper,
-  NotebookWrapper,
-  GlobalStyle,
-  ThemeButton,
-  DeleteButton,
-};
+
+export const DetailWrapper = styled.div` 
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%  
+    margin: 20px;
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 200px;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  p {
+    &.description {
+      font-size: medium;
+      text-align: center;
+      margin-left: 8px;
+      margin-right: 8px;
+      font-family: lato;
+      vertical-align: middle;
+      color: ${(props) => props.theme.darkBlue};
+    }
+
+
+    &.price {
+      font-size: small;
+      text-align: center;
+      color: ${(props) => props.theme.purple};
+      font-weight: bold;
+      font-family: raleway;
+      margin-bottom: 25px;
+    };
+
+
+
+
+`;
+// :hover {
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   height: 100px;
+//   width: 100px;
+//   opacity: 0;
+//   transition: 0.5s ease;
+//   background-color: #008cba;
+//   opacity: 1;
+// }
+// &.hover-text {
+//   color: white;
+//   font-size: 20px;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   -ms-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   text-align: center;
+// }
