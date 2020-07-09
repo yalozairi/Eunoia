@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import {Route, Switch} from "react-router"
+
 
 //styling
-import { Title, Logo, TakeALook, GlobalStyle, ThemeButton } from "./styles";
-
-//logo
-import logo from "./logo.png";
+import {GlobalStyle, LinkStyle} from "./styles";
 
 //Notebook List
 import NotebookList from "./components/NotebookList";
@@ -13,6 +12,9 @@ import NotebookList from "./components/NotebookList";
 import notebooks from "./notebooks";
 import Details from "./components/Details";
 
+import Home from "./components/Home"
+
+import NavBar from "./components/NavBar"
 //theme
 import { ThemeProvider } from "styled-components";
 
@@ -30,6 +32,9 @@ const theme = {
     button: "#e7e7e7",
     buttonText: "black",
     purple: "purple",
+    search: "white",
+    searchText: "#82B3B7",
+    searchBorder: "black",
   },
 
   white: {
@@ -45,6 +50,9 @@ const theme = {
     button: "#121212",
     buttonText: "white",
     purple: "purple",
+    search: "#EAE0CC",
+    searchText: "grey",
+    searchBorder: "black",
   },
   dark: {
     backgroundColor: "#121212",
@@ -59,12 +67,14 @@ const theme = {
     button: "#EAE0CC",
     buttonText: "black",
     purple: "purple",
+    search: "#EAE0CC",
+    searchText: "grey",
+    searchBorder: "white",
   },
 };
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("default");
-  const [notebook, setNotebook] = useState(null);
   const [_notebooks, setNotebooks] = useState(notebooks);
 
   const deleteNotebook = (notebookId) => {
@@ -72,7 +82,7 @@ function App() {
       (notebook) => notebook.id !== +notebookId
     );
     setNotebooks(updatedNotebooks);
-    setNotebook(null);
+
   };
   const toggleTheme = () => {
     currentTheme === "default"
@@ -82,47 +92,48 @@ function App() {
       : setCurrentTheme("default");
   };
 
-  const selectNotebook = (notebookId) => {
-    const selectedNotebook = notebooks.find(
-      (notebook) => notebook.id === notebookId
-    );
-    setNotebook(selectedNotebook);
+  const toggleNavTheme = (pickedTheme) => {
+  setCurrentTheme(pickedTheme);
   };
 
-  const setView = () => {
-    if (notebook)
-      return (
-        <Details
-          notebook={notebook}
-          deleteNotebook={deleteNotebook}
-          setNotebook={setNotebook}
-        />
-      );
-    return (
-      <NotebookList
-        deleteNotebook={deleteNotebook}
-        notebooks={_notebooks}
-        selectNotebook={selectNotebook}
-      />
-    );
-  };
+  // const selectNotebook = (notebookId) => {
+  //   const selectedNotebook = notebooks.find(
+  //     (notebook) => notebook.id === notebookId
+  //   );
+  //   setNotebook(selectedNotebook);
+  // };
 
+ 
+  
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <Title>Welcome to Eunoia!</Title>
-      <ThemeButton onClick={toggleTheme}>
-        Switch to{" "}
-        {currentTheme === "default"
-          ? "White"
-          : currentTheme === "white"
-          ? "Dark"
-          : "Default"}{" "}
-        Theme!
-      </ThemeButton>
-      <Logo src={logo} alt="Eunoia Palm Tree" />
-      <TakeALook>Take a look at our Notebooks!</TakeALook>
-      {setView()}
+      <NavBar toggleNavTheme={toggleNavTheme} />
+     
+      <Switch>
+      <Route path="/notebooks/:notebookSlug">
+      <Details
+          notebooks={_notebooks}
+          deleteNotebook={deleteNotebook}
+        />
+        </Route>
+      
+     <Route path="/notebooks">
+     <NotebookList
+        deleteNotebook={deleteNotebook}
+        notebooks={_notebooks}
+        
+      />
+
+     </Route>
+     <Route path="/">
+      <Home toggleTheme={toggleTheme} currentTheme={currentTheme}/>
+
+      </Route>
+     </Switch>
+     <LinkStyle to="/notebooks">Take a look at our Notebooks!</LinkStyle>
+     
+  
     </ThemeProvider>
   );
 }
