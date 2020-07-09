@@ -37,7 +37,7 @@ export const Logo = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 35%;
 `;
 
 export const NavBarLogo = styled.img`
