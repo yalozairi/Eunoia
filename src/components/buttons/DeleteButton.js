@@ -3,10 +3,13 @@ import React from "react";
 //styles
 import {DeleteButtonStyle} from "../../styles"
 
-const DeleteButton = ({deleteNotebook, notebookId}) => {
+//Stores
+import notebookStore from "../../stores/notebookStore"
+
+const DeleteButton = ({notebookId}) => {
  
     const handleDelete = () => {
-        deleteNotebook(notebookId);
+      notebookStore.deleteNotebook(notebookId);
 
       };
   return <DeleteButtonStyle onClick={handleDelete}>Delete</DeleteButtonStyle>;

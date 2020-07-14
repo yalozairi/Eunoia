@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import {Route, Switch} from "react-router"
 
-
 //styling
 import {GlobalStyle, LinkStyle} from "./styles";
 
 //Notebook List
 import NotebookList from "./components/NotebookList";
 
-// Data
-import notebooks from "./notebooks";
+// components
 import Details from "./components/Details";
-
 import Home from "./components/Home"
-
 import NavBar from "./components/NavBar"
 //theme
 import { ThemeProvider } from "styled-components";
@@ -75,15 +71,7 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("default");
-  const [_notebooks, setNotebooks] = useState(notebooks);
 
-  const deleteNotebook = (notebookId) => {
-    const updatedNotebooks = _notebooks.filter(
-      (notebook) => notebook.id !== +notebookId
-    );
-    setNotebooks(updatedNotebooks);
-
-  };
   const toggleTheme = () => {
     currentTheme === "default"
       ? setCurrentTheme("white")
@@ -96,15 +84,6 @@ function App() {
   setCurrentTheme(pickedTheme);
   };
 
-  // const selectNotebook = (notebookId) => {
-  //   const selectedNotebook = notebooks.find(
-  //     (notebook) => notebook.id === notebookId
-  //   );
-  //   setNotebook(selectedNotebook);
-  // };
-
- 
-  
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
@@ -112,18 +91,11 @@ function App() {
      
       <Switch>
       <Route path="/notebooks/:notebookSlug">
-      <Details
-          notebooks={_notebooks}
-          deleteNotebook={deleteNotebook}
-        />
+      <Details/>
         </Route>
       
      <Route path="/notebooks">
-     <NotebookList
-        deleteNotebook={deleteNotebook}
-        notebooks={_notebooks}
-        
-      />
+     <NotebookList/>
 
      </Route>
      <Route path="/">

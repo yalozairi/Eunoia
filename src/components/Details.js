@@ -1,19 +1,22 @@
 import React from "react";
 import {Link, useParams, Redirect} from "react-router-dom";
  
+//Stores
+import notebookStore from "../stores/notebookStore"
 
 //buttons
 import DeleteButton from "./buttons/DeleteButton"
+import UpdateButton from "./buttons/UpdateButton"
 
 //styles
 import { DetailWrapper} from "../styles";
 
-const Details = ({notebooks, deleteNotebook}) => {
+const Details = () => {
  
   const {notebookSlug} = useParams();
 
 
-const notebook = notebooks.find((notebook) => notebook.slug === notebookSlug);
+const notebook = notebookStore.notebooks.find((notebook) => notebook.slug === notebookSlug);
 if (!notebook) return <Redirect to="/notebooks" />
   return (
     <DetailWrapper>
@@ -28,7 +31,9 @@ if (!notebook) return <Redirect to="/notebooks" />
       <p className="description">{notebook.description}</p>
       <p className="price">{notebook.price} Kwd</p>
      
-      <DeleteButton notebookId={notebook.id} deleteNotebook={deleteNotebook}/>
+      
+<UpdateButton notebook={notebook}/>
+      <DeleteButton notebookId={notebook.id} />
     </DetailWrapper>
   );
 };

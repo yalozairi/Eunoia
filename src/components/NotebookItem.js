@@ -3,15 +3,16 @@ import {Link} from "react-router-dom";
 
 //buttons
 import DeleteButton from "./buttons/DeleteButton"
+import UpdateButton from "./buttons/UpdateButton"
 
 //styling
 import { NotebookWrapper } from "../styles";
 
-const NotebookItem = ({notebook, deleteNotebook}) => {
+const NotebookItem = ({notebook}) => {
   
   return (
     <div>
-      <NotebookWrapper className="col-lg-6 col-md-6 col-sm-6" key={notebook.id}>
+      <NotebookWrapper key={notebook.id}>
        <Link to={`/notebooks/${notebook.slug}`}>
          <img
           src={notebook.img}
@@ -21,7 +22,8 @@ const NotebookItem = ({notebook, deleteNotebook}) => {
         <p className="notebook-name">{notebook.name}</p>
         <p className="notebook-price">{notebook.price} Kwd</p>
       </NotebookWrapper>
-      <DeleteButton notebookId={notebook.id} deleteNotebook={deleteNotebook}/>
+      <UpdateButton notebook={notebook}/>
+      <DeleteButton notebookId={notebook.id}/>
     </div>
   );
 };

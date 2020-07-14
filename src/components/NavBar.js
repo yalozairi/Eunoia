@@ -7,7 +7,7 @@ import {NavBarLogo, NavStyle, NavItemStyle} from "../styles";
 //logo
 import logo from "../logo.png";
 
-const NavBar = ({toggleNavTheme}) => {
+const NavBar = ({toggleNavTheme}) => {  
 
 return (
    
@@ -24,14 +24,14 @@ Notebooks
 
 </NavItemStyle>
 
-<select className="nav-item" className="custom-select-sm">
-
-  <option selected>Pick your Theme!</option>
-
-  <option value="1" onClick={() => toggleNavTheme("default")}>Default Theme</option>
-  <option value="2" onClick={() => toggleNavTheme("white")}>White Theme</option>
-  <option value="3" onClick={() => toggleNavTheme("dark")}>Dark Theme</option>
+{(window.location.href) === "http://localhost:3000/" ? "" : <form>
+<select onChange={(event) => toggleNavTheme(event.target.value)}>
+  <option value="default">Default Theme</option>
+  <option value="white">White Theme</option>
+  <option value="dark">Dark Theme</option>
 </select>
+</form>}
+
 
     </div>
   </div>
