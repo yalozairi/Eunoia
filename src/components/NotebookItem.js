@@ -1,4 +1,5 @@
 import React from "react";
+import {observer} from "mobx-react";
 import {Link} from "react-router-dom";
 
 //buttons
@@ -27,4 +28,4 @@ const NotebookItem = ({notebook}) => {
     </div>
   );
 };
-export default NotebookItem;
+export default observer(NotebookItem);

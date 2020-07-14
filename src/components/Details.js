@@ -1,4 +1,5 @@
 import React from "react";
+import {observer} from "mobx-react"
 import {Link, useParams, Redirect} from "react-router-dom";
  
 //Stores
@@ -38,4 +39,4 @@ if (!notebook) return <Redirect to="/notebooks" />
   );
 };
 
-export default Details;
+export default observer(Details);

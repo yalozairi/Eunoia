@@ -20,6 +20,11 @@ this.notebooks = this.notebooks.filter(
 
   };
 
+updateNotebook = (updatedNotebook) => {
+  const notebook = this.notebooks.find((notebook) => notebook.id === updatedNotebook.id);
+  for (const key in updatedNotebook) notebook[key] = updatedNotebook[key]
+}
+
 };
 
 decorate(NotebookStore, {notebooks: observable,});

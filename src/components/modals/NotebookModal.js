@@ -22,7 +22,7 @@ const handleChange = (event) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  notebookStore.createNotebook(notebook)
+  notebookStore[oldNotebook ? "updateNotebook" : "createNotebook"](notebook);
   closeModal()
 }
 
@@ -79,7 +79,7 @@ const handleSubmit = (event) => {
     onChange={handleChange} 
     value={notebook.img}/>
   </div>
-  <CreateButtonStyled className="btn float-right">Create</CreateButtonStyled>
+  <CreateButtonStyled className="btn float-right">{oldNotebook ? "Update" : "Create" }</CreateButtonStyled>
 </form>
 
 
