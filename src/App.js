@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import {Route, Switch} from "react-router"
+import { Route, Switch } from "react-router";
 
 //styling
-import {GlobalStyle, LinkStyle} from "./styles";
+import { GlobalStyle, LinkStyle } from "./styles";
 
 //Notebook List
-import NotebookList from "./components/NotebookList";
+import NotebookList from "./components/list/NotebookList";
 
 // components
-import Details from "./components/Details";
-import Home from "./components/Home"
-import NavBar from "./components/NavBar"
+import Details from "./components/details/Details";
+import Home from "./components/home/Home";
+import NavBar from "./components/navBar/NavBar";
 //theme
 import { ThemeProvider } from "styled-components";
 
@@ -70,42 +70,53 @@ const theme = {
 };
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("default");
+  const savedTheme = localStorage.getItem("theme") ?? "default";
+  const [currentTheme, setCurrentTheme] = useState(savedTheme);
+  const [pickerShow, setPickerShow] = useState(
+    window.location.href === "http://localhost:3000/" ? false : true
+  );
 
   const toggleTheme = () => {
-    currentTheme === "default"
-      ? setCurrentTheme("white")
-      : currentTheme === "white"
-      ? setCurrentTheme("dark")
-      : setCurrentTheme("default");
+    const newTheme =
+      currentTheme === "default"
+        ? "white"
+        : currentTheme === "white"
+        ? "dark"
+        : "default";
+    setCurrentTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   const toggleNavTheme = (pickedTheme) => {
-  setCurrentTheme(pickedTheme);
+    setCurrentTheme(pickedTheme);
+    localStorage.setItem("theme", pickedTheme);
   };
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <NavBar toggleNavTheme={toggleNavTheme} />
-     
+      <NavBar
+        toggleNavTheme={toggleNavTheme}
+        setPickerShow={setPickerShow}
+        pickerShow={pickerShow}
+      />
+
       <Switch>
-      <Route path="/notebooks/:notebookSlug">
-      <Details/>
+        <Route path="/notebooks/:notebookSlug">
+          <Details />
         </Route>
-      
-     <Route path="/notebooks">
-     <NotebookList/>
-
-     </Route>
-     <Route path="/">
-      <Home toggleTheme={toggleTheme} currentTheme={currentTheme}/>
-
-      </Route>
-     </Switch>
-     <LinkStyle to="/notebooks">Take a look at our Notebooks!</LinkStyle>
-     
-  
+        <Route path="/notebooks">
+          <NotebookList />
+        </Route>
+        <Route path="/">
+          <Home toggleTheme={toggleTheme} currentTheme={currentTheme} />
+        </Route>
+      </Switch>
+      {window.location.href === "http://localhost:3000/" ? (
+        <LinkStyle to="/notebooks" onClick={() => setPickerShow(true)}>
+          Take a look at our Notebooks!
+        </LinkStyle>
+      ) : null}
     </ThemeProvider>
   );
 }

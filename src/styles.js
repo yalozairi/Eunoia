@@ -1,6 +1,6 @@
 //styles
 import styled, { createGlobalStyle } from "styled-components";
-import {Link, NavLink} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BsPlusCircle } from "react-icons/bs";
 
 export const GlobalStyle = createGlobalStyle`
@@ -45,7 +45,7 @@ export const NavBarLogo = styled.img`
   display: block;
   margin-left: 10px;
   margin-top: 5px;
-  height: 40px
+  height: 40px;
 `;
 
 export const ListWrapper = styled.div`
@@ -103,9 +103,9 @@ export const NotebookWrapper = styled.div`
   border: ${(props) => props.theme.lightBlue} solid;
   border-width: 100;
   border-radius: 10px;
-margin-left: 10px;
-margin-right: 10px;
-margin-bottom: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 3px;
   img {
     display: block;
     margin-left: auto;
@@ -152,17 +152,17 @@ export const DeleteButtonStyle = styled.button`
   }
 `;
 
-export const DetailWrapper = styled.div` 
-
+export const DetailTop = styled.div`
+  h1 {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%  
+    margin-left: 25px;
+    font-weight: bold;
     margin: 20px;
+  }
 
   img {
-    margin-left: 20px;
-    margin-right: auto;
+    display: flex;
+    margin: 20px;
     width: 200px;
     height: 200px;
 
@@ -170,22 +170,25 @@ export const DetailWrapper = styled.div`
       cursor: pointer;
     }
   }
-h1{
-  margin-left: 25px;
-  font-weight: bold;
-}
+`;
+
+export const DetailWrapper = styled.div`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 20px;
+
   p {
-    
     &.description {
       font-size: medium;
       text-align: center;
+      margin-top: 60px;
       margin-left: 8px;
       margin-right: 8px;
       font-family: lato;
       vertical-align: middle;
       color: ${(props) => props.theme.darkBlue};
     }
-
 
     &.price {
       font-size: small;
@@ -195,8 +198,10 @@ h1{
       font-family: raleway;
       margin-bottom: 25px;
       margin-top: -15px;
-    };
-`
+    }
+  }
+`;
+
 export const SearchBarStyle = styled.input`
   display: block;
   width: 28%;
@@ -212,10 +217,9 @@ export const SearchBarStyle = styled.input`
   font-size: 0.7em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   :hover {
-    cursor: pointer
-
-`
-
+    cursor: pointer;
+  }
+`;
 
 export const LinkStyle = styled(Link)`
   display: flex;
@@ -232,12 +236,10 @@ export const LinkStyle = styled(Link)`
     text-decoration: underline;
     color: ${(props) => props.theme.lightBlue};
   }
-
-
-`
+`;
 
 export const NavItemStyle = styled(NavLink)`
-display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.darkBlue};
@@ -248,45 +250,40 @@ display: flex;
 
   :hover {
     text-decoration: none;
-    background-color: #BFc2c2c2;
+    background-color: #bfc2c2c2;
     border-radius: 7px;
-    color: ${(props) => props.theme.lightBlue}
-  }
-
-  &.active{
     color: ${(props) => props.theme.lightBlue};
   }
 
-`
-
+  &.active {
+    color: ${(props) => props.theme.lightBlue};
+  }
+`;
 
 export const NavStyle = styled.nav`
-background-color: #BFc2c2c2;
-
-
-
-`
+  background-color: #bfc2c2c2;
+`;
 export const HoverButton = styled(BsPlusCircle)`
-:hover{
-  cursor:pointer
-}
-`
+  :hover {
+    cursor: pointer;
+  }
+`;
 
 export const UpdateButtonStyled = styled.button`
-color: ${(props) => props.theme.darkBlue};
-border: 0px;
-display: block;
-margin-left: auto;
-margin-right: auto;
-margin-top: 10px;
-margin-bottom: 10px;
-background-color: ${(props) => props.theme.backgroundColor};
-:hover {
-  background-color: ${(props) => props.theme.darkBlue};
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-}
+  color: ${(props) => props.theme.darkBlue};
+  border: 0px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  :hover {
+    background-color: ${(props) => props.theme.darkBlue};
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
 `;
 
 export const CreateButtonStyled = styled.button`
@@ -306,15 +303,11 @@ export const ModalStyle = {
     bottom: "auto",
     transform: "translate(-50%, -50%)",
     width: "40%",
-  }
-
-
-}
+  },
+};
 // export const ThemePicker = styled(select)`
 // background-color: green;
 // `
-
-;
 // :hover {
 //   position: absolute;
 //   top: 0;

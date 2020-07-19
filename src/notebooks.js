@@ -8,7 +8,7 @@ const notebooks = [
     slug: "seasonal-notebooks",
     img: NotebookStack,
     alt: "Notebook Pile",
-    description: "A pile of notebooks",
+    description: "This is a pile of notebooks",
     price: 25,
   },
   {
@@ -18,7 +18,7 @@ const notebooks = [
     img:
       "https://cdn.shopify.com/s/files/1/0831/9463/products/Notebooks_Notebook_Blossom-Pink_1200x1200.png?v=1571438791",
     alt: "Pink Spiral Notebook",
-    description: "here is a pink spiral notebook, perfect for you!",
+    description: "This is a pink spiral notebook, perfect for you!",
     price: 15,
   },
   {
@@ -28,7 +28,7 @@ const notebooks = [
     img: LifestyleNotebook,
     alt: "Lifestyle Notebook",
     description:
-      "here is our classic lifestyle notebook, one to keep throughout your daily life!",
+      "This is our classic lifestyle notebook, one to keep throughout your daily life!",
     price: 10,
   },
 ];
