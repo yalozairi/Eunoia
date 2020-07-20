@@ -1,12 +1,19 @@
 import { decorate, observable } from "mobx";
 import slugify from "react-slugify";
-
-//data
-import notebooks from "../notebooks";
+import axios from "axios";
 
 class NotebookStore {
-  notebooks = notebooks;
-  idCounter = notebooks.length + 1;
+  notebooks = [];
+  idCounter = this.notebooks.length + 1;
+
+  fetchNotebooks = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/notebooks");
+      this.notebooks = res.data;
+    } catch (error) {
+      console.error("NotebookStore -> fetchNotebooks -> error", error);
+    }
+  };
 
   createNotebook = (newNotebook) => {
     newNotebook.slug = slugify(newNotebook.name);
@@ -15,7 +22,12 @@ class NotebookStore {
     this.idCounter++;
   };
 
-  deleteNotebook = (notebookId) => {
+  deleteNotebook = async (notebookId) => {
+    try {
+      await axios.delete(`http://localhost:8000/notebooks/${notebookId}`);
+    } catch (error) {
+      console.error("NotebookStore -> deleteNotebook -> error", error);
+    }
     this.notebooks = this.notebooks.filter(
       (notebook) => notebook.id !== +notebookId
     );
@@ -32,4 +44,5 @@ class NotebookStore {
 decorate(NotebookStore, { notebooks: observable });
 
 const notebookStore = new NotebookStore();
+notebookStore.fetchNotebooks();
 export default notebookStore;
