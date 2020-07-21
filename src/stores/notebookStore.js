@@ -28,12 +28,12 @@ class NotebookStore {
   deleteNotebook = async (notebookId) => {
     try {
       await axios.delete(`http://localhost:8000/notebooks/${notebookId}`);
+      this.notebooks = this.notebooks.filter(
+        (notebook) => notebook.id !== +notebookId
+      );
     } catch (error) {
       console.error("NotebookStore -> deleteNotebook -> error", error);
     }
-    this.notebooks = this.notebooks.filter(
-      (notebook) => notebook.id !== +notebookId
-    );
   };
 
   updateNotebook = async (updatedNotebook) => {
