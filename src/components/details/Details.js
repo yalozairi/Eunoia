@@ -30,7 +30,7 @@ const Details = () => {
           <div className="col-sm-5 col-xs-12">
             <DetailTop>
               <Link to="/notebooks">
-                <img src={notebook.img} alt={notebook.alt} />
+                <img src={notebook.img} alt={notebook.name} />
               </Link>
             </DetailTop>
           </div>

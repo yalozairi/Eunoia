@@ -14,7 +14,7 @@ const NotebookItem = ({ notebook }) => {
     <div>
       <NotebookWrapper key={notebook.id}>
         <Link to={`/notebooks/${notebook.slug}`}>
-          <img src={notebook.img} alt={notebook.alt} />
+          <img src={notebook.img} alt={notebook.name} />
         </Link>
 
         <p className="notebook-name">{notebook.name}</p>

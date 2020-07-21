@@ -1,10 +1,8 @@
 import { decorate, observable } from "mobx";
-import slugify from "react-slugify";
 import axios from "axios";
 
 class NotebookStore {
   notebooks = [];
-  idCounter = this.notebooks.length + 1;
 
   fetchNotebooks = async () => {
     try {
@@ -15,11 +13,16 @@ class NotebookStore {
     }
   };
 
-  createNotebook = (newNotebook) => {
-    newNotebook.slug = slugify(newNotebook.name);
-    newNotebook.id = this.idCounter;
-    this.notebooks.push(newNotebook);
-    this.idCounter++;
+  createNotebook = async (newNotebook) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/notebooks",
+        newNotebook
+      );
+      this.notebooks.push(res.data);
+    } catch (error) {
+      console.error("NotebookStore -> createNotebook -> error", error);
+    }
   };
 
   deleteNotebook = async (notebookId) => {
@@ -33,11 +36,20 @@ class NotebookStore {
     );
   };
 
-  updateNotebook = (updatedNotebook) => {
-    const notebook = this.notebooks.find(
-      (notebook) => notebook.id === updatedNotebook.id
-    );
-    for (const key in updatedNotebook) notebook[key] = updatedNotebook[key];
+  updateNotebook = async (updatedNotebook) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/notebooks/${updatedNotebook.id}`,
+        updatedNotebook
+      );
+
+      const notebook = this.notebooks.find(
+        (notebook) => notebook.id === updatedNotebook.id
+      );
+      for (const key in updatedNotebook) notebook[key] = updatedNotebook[key];
+    } catch (error) {
+      console.error("NotebookStore -> updateNotebook -> error", error);
+    }
   };
 }
 
