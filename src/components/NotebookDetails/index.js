@@ -14,6 +14,10 @@ import { DetailWrapper, DetailTop, LinkStyle } from "../../styles";
 
 const Details = () => {
   const { notebookSlug } = useParams();
+  // const history = useHistory();
+  // const goBack = () => {
+  //   history.goBack();
+  // };
 
   const notebook = notebookStore.notebooks.find(
     (notebook) => notebook.slug === notebookSlug
@@ -30,7 +34,7 @@ const Details = () => {
           <div className="col-sm-5 col-xs-12">
             <DetailTop>
               <Link to="/notebooks">
-                <img src={notebook.img} alt={notebook.name} />
+                <img src={notebook.image} alt={notebook.name} />
               </Link>
             </DetailTop>
           </div>

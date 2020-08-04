@@ -3,19 +3,15 @@ import { observer } from "mobx-react";
 
 //components
 import NotebookItem from "./NotebookItem";
-import SearchBar from "../searchBar/SearchBar";
-
-//Stores
-import notebookStore from "../../stores/notebookStore";
+import SearchBar from "../SearchBar";
 
 //style
 import { ListWrapper, NotebooksTitle } from "../../styles";
-import AddButton from "../buttons/AddButton";
 
-const NotebookList = () => {
+const NotebookList = ({ notebooks }) => {
   const [query, setQuery] = useState("");
 
-  const notebookList = notebookStore.notebooks
+  const notebookList = notebooks
     .filter((notebook) =>
       notebook.name.toUpperCase().includes(query.toUpperCase())
     )
@@ -25,7 +21,6 @@ const NotebookList = () => {
       <NotebooksTitle>These are our Notebooks!</NotebooksTitle>
       <SearchBar setQuery={setQuery} />
       <ListWrapper className="row">{notebookList}</ListWrapper>
-      <AddButton />
     </div>
   );
 };

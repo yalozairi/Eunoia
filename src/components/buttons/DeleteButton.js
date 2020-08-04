@@ -5,10 +5,15 @@ import { DeleteButtonStyle } from "../../styles";
 
 //Stores
 import notebookStore from "../../stores/notebookStore";
+import vendorStore from "../../stores/vendorStore";
 
-const DeleteButton = ({ notebookId }) => {
+const DeleteButton = ({ notebookId, vendorId }) => {
   const handleDelete = () => {
-    notebookStore.deleteNotebook(notebookId);
+    if (vendorId) {
+      vendorStore.deleteVendor(vendorId);
+    } else {
+      notebookStore.deleteNotebook(notebookId);
+    }
   };
   return <DeleteButtonStyle onClick={handleDelete}>Delete</DeleteButtonStyle>;
 };

@@ -4,11 +4,12 @@ import NotebookModal from "../modals/NotebookModal";
 
 //styles
 import { UpdateButtonStyled } from "../../styles";
+import VendorModal from "../modals/VendorModal";
 
 //Stores
 // import notebookStore from "../../stores/notebookStore"
 
-const UpdateButton = ({ notebook }) => {
+const UpdateButton = ({ notebook, vendor }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -17,11 +18,19 @@ const UpdateButton = ({ notebook }) => {
   return (
     <>
       <UpdateButtonStyled onClick={openModal}>Update</UpdateButtonStyled>
-      <NotebookModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        oldNotebook={notebook}
-      />
+      {notebook ? (
+        <NotebookModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          oldNotebook={notebook}
+        />
+      ) : (
+        <VendorModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          oldVendor={vendor}
+        />
+      )}
     </>
   );
 };

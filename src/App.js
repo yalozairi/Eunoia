@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Route, Switch } from "react-router";
+import { observer } from "mobx-react";
 
-//styling
+//Styling
 import { GlobalStyle, LinkStyle } from "./styles";
 
-//Notebook List
-import NotebookList from "./components/list/NotebookList";
+//Components
+import Navbar from "./components/Navbar";
+import Routes from "./components/Routes";
 
-// components
-import Details from "./components/details/Details";
-import Home from "./components/home/Home";
-import NavBar from "./components/navBar/NavBar";
-//theme
+//Theme
 import { ThemeProvider } from "styled-components";
+import vendorStore from "./stores/vendorStore";
+import notebookStore from "./stores/notebookStore";
 
 const theme = {
   default: {
@@ -51,7 +50,7 @@ const theme = {
     searchBorder: "black",
   },
   dark: {
-    backgroundColor: "#121212",
+    backgroundColor: "#212121",
     mainColor: "white",
     yellow: "#DAC732",
     darkBlue: "#177d96",
@@ -76,17 +75,6 @@ function App() {
     window.location.href === "http://localhost:3000/" ? false : true
   );
 
-  const toggleTheme = () => {
-    const newTheme =
-      currentTheme === "default"
-        ? "white"
-        : currentTheme === "white"
-        ? "dark"
-        : "default";
-    setCurrentTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
-
   const toggleNavTheme = (pickedTheme) => {
     setCurrentTheme(pickedTheme);
     localStorage.setItem("theme", pickedTheme);
@@ -95,23 +83,19 @@ function App() {
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <NavBar
+      <Navbar
         toggleNavTheme={toggleNavTheme}
         setPickerShow={setPickerShow}
         pickerShow={pickerShow}
       />
 
-      <Switch>
-        <Route path="/notebooks/:notebookSlug">
-          <Details />
-        </Route>
-        <Route path="/notebooks">
-          <NotebookList />
-        </Route>
-        <Route path="/">
-          <Home toggleTheme={toggleTheme} currentTheme={currentTheme} />
-        </Route>
-      </Switch>
+      {vendorStore.loading || notebookStore.loading ? (
+        <h1>loading...</h1>
+      ) : (
+        <Routes currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
+      )}
+
+      {/* FIX TO WORK WITH ALL URLS */}
       {window.location.href === "http://localhost:3000/" ? (
         <LinkStyle to="/notebooks" onClick={() => setPickerShow(true)}>
           Take a look at our Notebooks!
@@ -121,4 +105,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
