@@ -8,7 +8,7 @@ import SearchBar from "../SearchBar";
 //style
 import { ListWrapper, NotebooksTitle } from "../../styles";
 
-const NotebookList = ({ notebooks }) => {
+const NotebookList = ({ notebooks = [] }) => {
   const [query, setQuery] = useState("");
 
   const notebookList = notebooks
