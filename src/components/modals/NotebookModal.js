@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { ModalStyle, CreateButtonStyled } from "../../styles";
+import { ModalStyle, CreateButtonStyled } from "./styles";
 //Stores
 import notebookStore from "../../stores/notebookStore";
 

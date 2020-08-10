@@ -1,7 +1,7 @@
 import React from "react";
 
 //styles
-import { DeleteButtonStyle } from "../../styles";
+import { DeleteButtonStyle } from "./styles";
 
 //Stores
 import notebookStore from "../../stores/notebookStore";

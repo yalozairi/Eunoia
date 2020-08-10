@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import NotebookModal from "../modals/NotebookModal";
 
 //styles
-import { UpdateButtonStyled } from "../../styles";
-
-//Stores
-// import notebookStore from "../../stores/notebookStore"
+import { UpdateButtonStyled } from "./styles";
 
 const UpdateButton = ({ notebook }) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -6,6 +6,7 @@ import { NavBarLogo, NavStyle, NavItemStyle } from "../../styles";
 
 //logo
 import logo from "../../logo.png";
+import SignUpButton from "../buttons/SignUpButton";
 
 const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
   return (
@@ -27,6 +28,8 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
           >
             Notebooks
           </NavItemStyle>
+
+          <SignUpButton />
 
           {pickerShow === false ? null : (
             <form>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NotebookModal from "../modals/NotebookModal";
-import { HoverButton } from "../../styles";
+import { HoverButton } from "./styles";
 
 const AddButton = () => {
   const [isOpen, setIsOpen] = useState(false);

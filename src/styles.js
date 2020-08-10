@@ -1,7 +1,6 @@
 //styles
 import styled, { createGlobalStyle } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { BsPlusCircle } from "react-icons/bs";
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -136,22 +135,6 @@ export const NotebookWrapper = styled.div`
   }
 `;
 
-export const DeleteButtonStyle = styled.button`
-  color: red;
-  border: 0px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  background-color: ${(props) => props.theme.backgroundColor};
-  :hover {
-    background-color: red;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-`;
-
 export const DetailTop = styled.div`
   h1 {
     display: block;
@@ -263,48 +246,6 @@ export const NavItemStyle = styled(NavLink)`
 export const NavStyle = styled.nav`
   background-color: #bfc2c2c2;
 `;
-export const HoverButton = styled(BsPlusCircle)`
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-export const UpdateButtonStyled = styled.button`
-  color: ${(props) => props.theme.darkBlue};
-  border: 0px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: ${(props) => props.theme.backgroundColor};
-  :hover {
-    background-color: ${(props) => props.theme.darkBlue};
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-`;
-
-export const CreateButtonStyled = styled.button`
-  color: ${(props) => props.theme.backgroundColor};
-  background-color: ${(props) => props.theme.mainColor};
-
-  &:hover {
-    color: ${(props) => props.theme.mainColor};
-    background-color: ${(props) => props.theme.backgroundColor};
-  }
-`;
-export const ModalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    transform: "translate(-50%, -50%)",
-    width: "40%",
-  },
-};
 // export const ThemePicker = styled(select)`
 // background-color: green;
 // `
