@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import NotebookModal from "../modals/NotebookModal";
-import { HoverButton } from "./styles";
+import VendorModal from "../modals/VendorModal";
+import { HoverButton } from "../../styles";
 
-const AddButton = () => {
+const AddButton = ({ vendor }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -12,7 +13,15 @@ const AddButton = () => {
   return (
     <div>
       <HoverButton className="float-right" size="1.5em" onClick={openModal} />
-      <NotebookModal isOpen={isOpen} closeModal={closeModal} />
+      {vendor ? (
+        <NotebookModal
+          vendor={vendor}
+          isOpen={isOpen}
+          closeModal={closeModal}
+        />
+      ) : (
+        <VendorModal isOpen={isOpen} closeModal={closeModal} />
+      )}
     </div>
   );
 };

@@ -23,6 +23,13 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
         <div className="navbar-nav ml-auto">
           <NavItemStyle
             className="nav-item"
+            to="/vendors"
+            onClick={() => setPickerShow(true)}
+          >
+            Vendors
+          </NavItemStyle>
+          <NavItemStyle
+            className="nav-item"
             to="/notebooks"
             onClick={() => setPickerShow(true)}
           >

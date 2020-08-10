@@ -4,13 +4,13 @@ import { ModalStyle, CreateButtonStyled } from "./styles";
 //Stores
 import notebookStore from "../../stores/notebookStore";
 
-const NotebookModal = ({ isOpen, closeModal, oldNotebook }) => {
+const NotebookModal = ({ isOpen, closeModal, oldNotebook, vendor }) => {
   const [notebook, setNotebook] = useState(
     oldNotebook ?? {
       name: "",
       price: 0,
       description: "",
-      img: "",
+      image: "",
     }
   );
 
@@ -20,8 +20,15 @@ const NotebookModal = ({ isOpen, closeModal, oldNotebook }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    notebookStore[oldNotebook ? "updateNotebook" : "createNotebook"](notebook);
+    notebookStore[oldNotebook ? "updateNotebook" : "createNotebook"](
+      notebook,
+      vendor
+    );
     closeModal();
+  };
+
+  const handleImage = (event) => {
+    setNotebook({ ...notebook, image: event.target.files[0] });
   };
 
   return (
@@ -73,12 +80,11 @@ const NotebookModal = ({ isOpen, closeModal, oldNotebook }) => {
           <div className="form-group">
             <label>Image</label>
             <input
-              type="text"
-              required
+              type="file"
+              // required
               className="form-control"
-              name="img"
-              onChange={handleChange}
-              value={notebook.img}
+              name="image"
+              onChange={handleImage}
             />
           </div>
           <CreateButtonStyled className="btn float-right">
