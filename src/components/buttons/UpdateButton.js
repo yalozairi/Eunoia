@@ -3,11 +3,8 @@ import React, { useState } from "react";
 import NotebookModal from "../modals/NotebookModal";
 
 //styles
-import { UpdateButtonStyled } from "../../styles";
+import { UpdateButtonStyled } from "./styles";
 import VendorModal from "../modals/VendorModal";
-
-//Stores
-// import notebookStore from "../../stores/notebookStore"
 
 const UpdateButton = ({ notebook, vendor }) => {
   const [isOpen, setIsOpen] = useState(false);
