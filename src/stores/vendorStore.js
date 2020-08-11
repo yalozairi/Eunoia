@@ -1,5 +1,5 @@
 import { decorate, observable } from "mobx";
-import axios from "axios";
+import instance from "./instance";
 
 class VendorStore {
   vendors = [];
@@ -7,7 +7,7 @@ class VendorStore {
 
   fetchVendors = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/vendors");
+      const res = await instance.get("/vendors");
       this.vendors = res.data;
       this.loading = false;
     } catch (error) {
@@ -19,7 +19,7 @@ class VendorStore {
     try {
       const formData = new FormData();
       for (const key in newVendor) formData.append(key, newVendor[key]);
-      const res = await axios.post("http://localhost:8000/vendors", formData);
+      const res = await instance.post("/vendors", formData);
       this.vendors.push(res.data);
     } catch (error) {
       console.error("VendorStore -> createVendor -> error", error);
@@ -28,7 +28,7 @@ class VendorStore {
 
   deleteVendor = async (vendorId) => {
     try {
-      await axios.delete(`http://localhost:8000/vendors/${vendorId}`);
+      await instance.delete(`/vendors/${vendorId}`);
       this.vendors = this.vendors.filter((vendor) => vendor.id !== +vendorId);
     } catch (error) {
       console.error("VendorStore -> deleteVendor -> error", error);
@@ -39,8 +39,8 @@ class VendorStore {
     try {
       const formData = new FormData();
       for (const key in updatedVendor) formData.append(key, updatedVendor[key]);
-      await axios.put(
-        `http://localhost:8000/vendors/${updatedVendor.id}`,
+      await instance.put(
+        `/vendors/${updatedVendor.id}`,
         formData
       );
 

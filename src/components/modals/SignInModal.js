@@ -5,11 +5,9 @@ import { AuthModalStyle, CreateButtonStyled, AuthFormLabel } from "./styles";
 //Stores
 import authStore from "../../stores/authStore";
 
-const SignUpModal = ({ isOpen, closeModal }) => {
+const SignInModal = ({ isOpen, closeModal }) => {
   const [user, setUser] = useState({
       username: "",
-      email: "",
-      fullName: "",
       password: "",
   });
 
@@ -19,7 +17,7 @@ const SignUpModal = ({ isOpen, closeModal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    authStore.signup(user);
+    authStore.signin(user);
     closeModal();
   };
 
@@ -32,7 +30,7 @@ const SignUpModal = ({ isOpen, closeModal }) => {
         contentLabel="Example Modal"
       >
         <form onSubmit={handleSubmit}>
-          <h3 style={{ textAlign: "center" }}>Sign Up</h3>
+          <h3 style={{ textAlign: "center" }}>Sign In</h3>
           <div className="form-group row">
             <div className="col-12">
               <AuthFormLabel>Username*</AuthFormLabel>
@@ -45,28 +43,6 @@ const SignUpModal = ({ isOpen, closeModal }) => {
                 value={user.username}
               />
             </div>
-            <div className="col-6">
-              <AuthFormLabel>Email*</AuthFormLabel>
-              <input
-                type="text"
-                required
-                className="form-control"
-                name="email"
-                onChange={handleChange}
-                value={user.name}
-              />
-            </div>
-            <div className="col-6">
-              <AuthFormLabel>Full Name</AuthFormLabel>
-              <input
-                type="text"
-                className="form-control"
-                name="fullName"
-                onChange={handleChange}
-                value={user.fullName}
-              />
-            </div>
-
           <div className="col-12">
               <AuthFormLabel>Password*</AuthFormLabel>
               <input
@@ -80,7 +56,7 @@ const SignUpModal = ({ isOpen, closeModal }) => {
             </div>
           </div>
           <CreateButtonStyled className="btn float-right">
-            Sign Up
+            Sign In
           </CreateButtonStyled>
         </form>
       </Modal>
@@ -88,4 +64,4 @@ const SignUpModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default SignUpModal;
+export default SignInModal;

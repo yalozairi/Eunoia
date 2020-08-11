@@ -7,6 +7,7 @@ import { NavBarLogo, NavStyle, NavItemStyle } from "../../styles";
 //logo
 import logo from "../../logo.png";
 import SignUpButton from "../buttons/SignUpButton";
+import SignInButton from "../buttons/SignInButton";
 
 const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
   return (
@@ -36,6 +37,7 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
             Notebooks
           </NavItemStyle>
 
+          <SignInButton />
           <SignUpButton />
 
           {pickerShow === false ? null : (

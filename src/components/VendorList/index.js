@@ -7,7 +7,7 @@ import { VendorTitle, VendorListWrapper } from "./styles";
 //Stores
 import vendorStore from "../../stores/vendorStore";
 import VendorItem from "./VendorItem";
-import SearchBar from "../SearchBar";
+import SearchBar from "../searchBar";
 import AddButton from "../buttons/AddButton";
 
 const VendorList = () => {

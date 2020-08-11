@@ -1,5 +1,5 @@
 import { decorate, observable } from "mobx";
-import axios from "axios";
+import instance from "./instance";
 
 class NotebookStore {
   notebooks = [];
@@ -7,7 +7,7 @@ class NotebookStore {
 
   fetchNotebooks = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/notebooks");
+      const res = await instance.get("/notebooks");
       this.notebooks = res.data;
       this.loading = false;
     } catch (error) {
@@ -23,8 +23,8 @@ class NotebookStore {
     try {
       const formData = new FormData();
       for (const key in newNotebook) formData.append(key, newNotebook[key]);
-      const res = await axios.post(
-        `http://localhost:8000/vendors/${vendor.id}/notebooks`,
+      const res = await instance.post(
+        `/vendors/${vendor.id}/notebooks`,
         formData
       );
       this.notebooks.push(res.data);
@@ -36,7 +36,7 @@ class NotebookStore {
 
   deleteNotebook = async (notebookId) => {
     try {
-      await axios.delete(`http://localhost:8000/notebooks/${notebookId}`);
+      await instance.delete(`/notebooks/${notebookId}`);
       this.notebooks = this.notebooks.filter(
         (notebook) => notebook.id !== +notebookId
       );
@@ -50,8 +50,8 @@ class NotebookStore {
       const formData = new FormData();
       for (const key in updatedNotebook)
         formData.append(key, updatedNotebook[key]);
-      await axios.put(
-        `http://localhost:8000/notebooks/${updatedNotebook.id}`,
+      await instance.put(
+        `/notebooks/${updatedNotebook.id}`,
         formData
       );
 
