@@ -7,10 +7,11 @@ import authStore from "../../stores/authStore";
 
 const SignUpModal = ({ isOpen, closeModal }) => {
   const [user, setUser] = useState({
-      username: "",
-      email: "",
-      fullName: "",
-      password: "",
+    username: "",
+    email: "",
+    fullName: "",
+    password: "",
+    role: "vendor",
   });
 
   const handleChange = (event) => {
@@ -48,7 +49,7 @@ const SignUpModal = ({ isOpen, closeModal }) => {
             <div className="col-6">
               <AuthFormLabel>Email*</AuthFormLabel>
               <input
-                type="text"
+                type="email"
                 required
                 className="form-control"
                 name="email"
@@ -67,7 +68,7 @@ const SignUpModal = ({ isOpen, closeModal }) => {
               />
             </div>
 
-          <div className="col-12">
+            <div className="col-12">
               <AuthFormLabel>Password*</AuthFormLabel>
               <input
                 type="password"

@@ -15,9 +15,8 @@ class NotebookStore {
     }
   };
 
-  getNotebookById = (notebookId) => {
-    return this.notebooks.find((notebook) => notebook.id === notebookId);
-  };
+  getNotebookById = (notebookId) =>
+    this.notebooks.find((notebook) => notebook.id === notebookId);
 
   createNotebook = async (newNotebook, vendor) => {
     try {
@@ -50,10 +49,7 @@ class NotebookStore {
       const formData = new FormData();
       for (const key in updatedNotebook)
         formData.append(key, updatedNotebook[key]);
-      await instance.put(
-        `/notebooks/${updatedNotebook.id}`,
-        formData
-      );
+      await instance.put(`/notebooks/${updatedNotebook.id}`, formData);
 
       const notebook = this.notebooks.find(
         (notebook) => notebook.id === updatedNotebook.id

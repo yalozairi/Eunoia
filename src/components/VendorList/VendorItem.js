@@ -5,6 +5,7 @@ import { VendorWrapper } from "./styles";
 import { Link } from "react-router-dom";
 import UpdateButton from "../buttons/UpdateButton";
 import DeleteButton from "../buttons/DeleteButton";
+import { observer } from "mobx-react";
 
 const VendorItem = ({ vendor }) => {
   return (
@@ -22,4 +23,4 @@ const VendorItem = ({ vendor }) => {
   );
 };
 
-export default VendorItem;
+export default observer(VendorItem);

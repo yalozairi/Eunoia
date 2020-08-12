@@ -95,7 +95,7 @@ function App() {
         <Routes currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
       )}
 
-      {/* FIX TO WORK WITH ALL URLS */}
+      {/* TODO: FIX TO WORK WITH ALL URLS (add not equal to all used urls)*/}
       {window.location.href === "http://localhost:3000/" ? (
         <LinkStyle to="/notebooks" onClick={() => setPickerShow(true)}>
           Take a look at our Notebooks!

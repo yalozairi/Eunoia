@@ -20,14 +20,19 @@ const VendorDetail = () => {
   const vendor = vendorStore.vendors.find(
     (_vendor) => _vendor.slug === vendorSlug
   );
-  const notebooks = vendor.notebooks
-    .map((notebook) => notebookStore.getNotebookById(notebook.id))
-    .filter((notebook) => notebook);
 
   if (!vendor) return <Redirect to="/vendors" />;
+
+  let notebooks = [];
+
+  if (vendor.notebooks) {
+    notebooks = vendor.notebooks
+      .map((notebook) => notebookStore.getNotebookById(notebook.id))
+      .filter((notebook) => notebook);
+  }
+
   return (
     <div className>
-      {" "}
       <DetailWrapper>
         <DetailTop>
           <h1>{vendor.name}</h1>

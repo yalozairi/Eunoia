@@ -1,31 +1,40 @@
-import { decorate } from "mobx";
-//observable?
+import { decorate, observable } from "mobx";
 import instance from "./instance";
+import decode from "jwt-decode";
 
 class AuthStore {
+  user = null;
 
-    signup = async (userData) => {
+  setUser = (token) => {
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    this.user = decode(token);
+  };
+
+  signup = async (userData) => {
     try {
-        await instance.post("/signup", userData)
+      const res = await instance.post("/signup", userData);
+      this.setUser(res.data.token);
     } catch (error) {
-    console.error("AuthStore -> error", error)   
-    };
+      console.error("AuthStore -> error", error);
     }
-    signin = async (userData) => {
-        try {
-            const res = await instance.post("/signin", userData)
-            console.log("AuthStore -> signin -> res.data", res.data)
-        } catch (error) {
-        console.error("AuthStore -> signin -> error", error)
-            
-        }
+  };
+
+  signin = async (userData) => {
+    try {
+      const res = await instance.post("/signin", userData);
+      this.setUser(res.data.token);
+    } catch (error) {
+      console.error("AuthStore -> signin -> error", error);
     }
+  };
 
-
-    
+  signout = () => {
+    delete instance.defaults.headers.common.Authorization;
+    this.user = null;
+  };
 }
 
-decorate(AuthStore, {});
+decorate(AuthStore, { user: observable });
 
 const authStore = new AuthStore();
 

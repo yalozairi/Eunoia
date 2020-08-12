@@ -8,8 +8,14 @@ import SearchBar from "../searchBar";
 //style
 import { ListWrapper, NotebooksTitle } from "../../styles";
 
+//Stores
+import authStore from "../../stores/authStore";
+import { Redirect } from "react-router";
+
 const NotebookList = ({ notebooks = [] }) => {
   const [query, setQuery] = useState("");
+  if (!authStore.user || authStore.user.role !== "admin")
+    return <Redirect to="/" />;
 
   const notebookList = notebooks
     .filter((notebook) =>
