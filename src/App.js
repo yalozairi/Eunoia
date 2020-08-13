@@ -5,11 +5,14 @@ import { observer } from "mobx-react";
 import { GlobalStyle, LinkStyle } from "./styles";
 
 //Components
-import Navbar from "./components/navBar";
+import Navbar from "./components/Navbar";
 import Routes from "./components/Routes";
 
 //Theme
 import { ThemeProvider } from "styled-components";
+
+//Stores
+import authStore from "./stores/authStore";
 import vendorStore from "./stores/vendorStore";
 import notebookStore from "./stores/notebookStore";
 
@@ -94,13 +97,13 @@ function App() {
       ) : (
         <Routes currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
       )}
-
-      {/* TODO: FIX TO WORK WITH ALL URLS (add not equal to all used urls)*/}
-      {window.location.href === "http://localhost:3000/" ? (
-        <LinkStyle to="/notebooks" onClick={() => setPickerShow(true)}>
-          Take a look at our Notebooks!
-        </LinkStyle>
-      ) : null}
+      {window.location.href === "http://localhost:3000/" &&
+        authStore.user &&
+        authStore.user.role === "admin" && (
+          <LinkStyle to="/notebooks" onClick={() => setPickerShow(true)}>
+            Take a look at our Notebooks!
+          </LinkStyle>
+        )}
     </ThemeProvider>
   );
 }
