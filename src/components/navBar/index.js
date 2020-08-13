@@ -54,6 +54,7 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
                   <p className="usernameStyled">{authStore.user.username}</p>
                 </p>
               </UserStyled>
+              {/* HIDE THEME PICKER */}
               <LogOutStyled
                 onClick={authStore.signout}
                 size="2em"
