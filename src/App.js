@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { GlobalStyle, LinkStyle } from "./styles";
 
 //Components
-import Navbar from "./components/navBar";
+import Navbar from "./components/Navbar";
 import Routes from "./components/Routes";
 
 //Theme

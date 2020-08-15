@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 //components
 import NotebookItem from "./NotebookItem";
-import SearchBar from "../searchBar";
+import SearchBar from "../SearchBar";
 
 //style
 import { ListWrapper, NotebooksTitle } from "../../styles";
