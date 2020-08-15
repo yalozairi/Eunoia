@@ -56,13 +56,14 @@ const Details = () => {
           </div>
         </div>
       </DetailWrapper>
-      {!authStore.user.vendorSlug ? null : authStore.user.role !== "admin" ? (
+      {authStore.user.role === "admin" ? (
+        <LinkStyle to="/notebooks">Take a look at all Notebooks!</LinkStyle>
+      ) : !authStore.user.vendorSlug ? null : authStore.user.role !==
+        "admin" ? (
         <LinkStyle to={`/vendors/${authStore.user.vendorSlug}`}>
           Back to Your Vendor Page
         </LinkStyle>
-      ) : (
-        <LinkStyle to="/notebooks">Take a look at our Notebooks!</LinkStyle>
-      )}
+      ) : null}
     </>
   );
 };
