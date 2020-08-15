@@ -77,6 +77,7 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
           )}
           {authStore.user &&
             authStore.user.role !== "admin" &&
+            authStore.user.role !== "customer" &&
             !authStore.user.vendorSlug && (
               <button onClick={openModal}>Create your Vendor!</button>
             )}
