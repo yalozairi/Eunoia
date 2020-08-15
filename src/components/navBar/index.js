@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 //Styles
@@ -7,6 +7,9 @@ import { UserStyled, LogOutStyled } from "./styles";
 
 //Logo
 import logo from "../../logo.png";
+
+//Components
+import VendorModal from "../modals/VendorModal";
 import SignUpButton from "../buttons/SignUpButton";
 import SignInButton from "../buttons/SignInButton";
 
@@ -15,6 +18,16 @@ import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 
 const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
+  //LOG OUT AND HIDE PICKER
+  const logOut = () => {
+    authStore.signout();
+    setPickerShow(false);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
   return (
     <NavStyle className="navbar navbar-expand">
       <Link
@@ -45,20 +58,17 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
               </NavItemStyle>
             </>
           )}
-
           {authStore.user ? (
             <>
               <UserStyled>
                 <p className="helloStyled">
-                  Hello,
-                  <p className="usernameStyled">{authStore.user.username}</p>
+                  Hello, {""}
+                  <span className="usernameStyled">
+                    {authStore.user.username}
+                  </span>
                 </p>
               </UserStyled>
-              <LogOutStyled
-                onClick={authStore.signout}
-                size="2em"
-                color="red"
-              />
+              <LogOutStyled onClick={logOut} size="2em" color="red" />
             </>
           ) : (
             <>
@@ -66,7 +76,12 @@ const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
               <SignUpButton />
             </>
           )}
-
+          {authStore.user &&
+            authStore.user.role !== "admin" &&
+            !authStore.user.vendorSlug && (
+              <button onClick={openModal}>Create your Vendor!</button>
+            )}
+          <VendorModal isOpen={isOpen} closeModal={closeModal} />
           {pickerShow === false ? null : (
             <form>
               <select

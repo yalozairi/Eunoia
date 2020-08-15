@@ -11,6 +11,7 @@ import UpdateButton from "../buttons/UpdateButton";
 
 //styles
 import { DetailWrapper, DetailTop, LinkStyle } from "../../styles";
+import authStore from "../../stores/authStore";
 
 const Details = () => {
   const { notebookSlug } = useParams();
@@ -18,6 +19,7 @@ const Details = () => {
   // const goBack = () => {
   //   history.goBack();
   // };
+  if (!authStore.user) return <Redirect to="/" />;
 
   const notebook = notebookStore.notebooks.find(
     (notebook) => notebook.slug === notebookSlug
@@ -33,9 +35,15 @@ const Details = () => {
         <div className="row">
           <div className="col-sm-5 col-xs-12">
             <DetailTop>
-              <Link to="/notebooks">
-                <img src={notebook.image} alt={notebook.name} />
-              </Link>
+              {authStore.user.role !== "admin" ? (
+                <Link to={`/vendors/${authStore.user.vendorSlug}`}>
+                  <img src={notebook.image} alt={notebook.name} />
+                </Link>
+              ) : (
+                <Link to="/notebooks">
+                  <img src={notebook.image} alt={notebook.name} />
+                </Link>
+              )}
             </DetailTop>
           </div>
 
@@ -48,7 +56,13 @@ const Details = () => {
           </div>
         </div>
       </DetailWrapper>
-      <LinkStyle to="/notebooks">Take a look at our Notebooks!</LinkStyle>
+      {!authStore.user.vendorSlug ? null : authStore.user.role !== "admin" ? (
+        <LinkStyle to={`/vendors/${authStore.user.vendorSlug}`}>
+          Back to Your Vendor Page
+        </LinkStyle>
+      ) : (
+        <LinkStyle to="/notebooks">Take a look at our Notebooks!</LinkStyle>
+      )}
     </>
   );
 };

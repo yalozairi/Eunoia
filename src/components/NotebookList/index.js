@@ -12,9 +12,15 @@ import { ListWrapper, NotebooksTitle } from "../../styles";
 import authStore from "../../stores/authStore";
 import { Redirect } from "react-router";
 
-const NotebookList = ({ notebooks = [] }) => {
+const NotebookList = ({ notebooks = [], vendorSlug }) => {
   const [query, setQuery] = useState("");
-  if (!authStore.user || authStore.user.role !== "admin")
+
+  if (
+    !authStore.user ||
+    (!authStore.user &&
+      authStore.user.role !== "admin" &&
+      authStore.user.vendorSlug !== vendorSlug)
+  )
     return <Redirect to="/" />;
 
   const notebookList = notebooks

@@ -72,6 +72,7 @@ const theme = {
 };
 
 function App() {
+  console.log("App -> authStore.user", authStore.user);
   const savedTheme = localStorage.getItem("theme") ?? "default";
   const [currentTheme, setCurrentTheme] = useState(savedTheme);
   const [pickerShow, setPickerShow] = useState(

@@ -7,8 +7,8 @@ import authStore from "../../stores/authStore";
 
 const SignInModal = ({ isOpen, closeModal }) => {
   const [user, setUser] = useState({
-      username: "",
-      password: "",
+    username: "",
+    password: "",
   });
 
   const handleChange = (event) => {
@@ -43,7 +43,7 @@ const SignInModal = ({ isOpen, closeModal }) => {
                 value={user.username}
               />
             </div>
-          <div className="col-12">
+            <div className="col-12">
               <AuthFormLabel>Password*</AuthFormLabel>
               <input
                 type="password"
@@ -55,9 +55,17 @@ const SignInModal = ({ isOpen, closeModal }) => {
               />
             </div>
           </div>
-          <CreateButtonStyled className="btn float-right">
-            Sign In
-          </CreateButtonStyled>
+          <div className="row">
+            <div className="col-6">
+              {/* cursor HOVER STYLES AND MAKE IT WORK */}
+              <h6 onClick={closeModal}>Sign up?</h6>
+            </div>
+            <div className="col-6">
+              <CreateButtonStyled className="btn float-right">
+                Sign In
+              </CreateButtonStyled>
+            </div>
+          </div>
         </form>
       </Modal>
     </div>

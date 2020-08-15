@@ -3,6 +3,7 @@ import { Link, useParams, Redirect } from "react-router-dom";
 
 //Stores
 import vendorStore from "../../stores/vendorStore";
+import authStore from "../../stores/authStore";
 
 //buttons
 import DeleteButton from "../buttons/DeleteButton";
@@ -17,11 +18,15 @@ import notebookStore from "../../stores/notebookStore";
 
 const VendorDetail = () => {
   const { vendorSlug } = useParams();
+  if (!authStore.user) return <Redirect to="/" />;
+
   const vendor = vendorStore.vendors.find(
     (_vendor) => _vendor.slug === vendorSlug
   );
-
-  if (!vendor) return <Redirect to="/vendors" />;
+  if (!vendor && authStore.user.role === "admin")
+    return <Redirect to="/vendors" />;
+  else if (!vendor && authStore.user.role !== "admin")
+    return <Redirect to="/" />;
 
   let notebooks = [];
 
@@ -52,10 +57,12 @@ const VendorDetail = () => {
         </div>
       </DetailWrapper>
       <div className="container">
-        <NotebookList notebooks={notebooks} />
+        <NotebookList notebooks={notebooks} vendorSlug={vendor.slug} />
         <AddButton vendor={vendor} />
       </div>
-      <LinkStyle to="/vendors">Back to the Vendors!</LinkStyle>
+      {authStore.user.role !== "admin" ? null : (
+        <LinkStyle to="/vendors">Back to the Vendors!</LinkStyle>
+      )}
     </div>
   );
 };
