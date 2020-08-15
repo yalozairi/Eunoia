@@ -18,7 +18,6 @@ import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 
 const NavBar = ({ toggleNavTheme, setPickerShow, pickerShow }) => {
-  //LOG OUT AND HIDE PICKER
   const logOut = () => {
     authStore.signout();
     setPickerShow(false);

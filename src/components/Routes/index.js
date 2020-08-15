@@ -9,7 +9,7 @@ import notebookStore from "../../stores/notebookStore";
 
 // components
 import NotebookDetails from "../NotebookDetails";
-import Home from "../Home";
+import Home from "../home";
 import VendorList from "../VendorList";
 import VendorDetail from "../VendorDetail";
 

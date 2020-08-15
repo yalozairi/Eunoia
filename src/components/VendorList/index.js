@@ -10,7 +10,7 @@ import authStore from "../../stores/authStore";
 
 //Components
 import VendorItem from "./VendorItem";
-import SearchBar from "../SearchBar";
+import SearchBar from "../searchBar";
 import AddButton from "../buttons/AddButton";
 import { Redirect } from "react-router";
 
