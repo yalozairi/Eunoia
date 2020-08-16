@@ -25,7 +25,7 @@ const VendorDetail = () => {
   );
   if (!vendor && authStore.user.role === "admin")
     return <Redirect to="/vendors" />;
-  else if (!vendor && authStore.user.role !== "admin")
+  else if ((!vendor && authStore.user.role !== "admin") || !authStore.user)
     return <Redirect to="/" />;
 
   let notebooks = [];
